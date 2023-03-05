@@ -1,6 +1,5 @@
 #include "movement.h"
 
-
 // Objects ------------------------------------------------------
 movement mov;
 

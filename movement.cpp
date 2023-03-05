@@ -1,10 +1,10 @@
 #include "movement.h"
 
 movement::movement(){
-    analogWrite( right_Forward  , 0 );
-    analogWrite( right_Backward , 0 );
-    analogWrite( left_Forward   , 0 );
-    analogWrite( left_Backward  , 0 );
+  analogWrite( right_Forward  , 0 );
+  analogWrite( right_Backward , 0 );
+  analogWrite( left_Forward   , 0 );
+  analogWrite( left_Backward  , 0 );
 }
 void movement::base_move(const int rF, const int rB, const int lF, const int lB){
   analogWrite( right_Forward  , lB );
