@@ -1,4 +1,6 @@
-#pragma once 
+#ifndef MOVEMENT_H
+#define MOVEMENT_H 
+
 #include <Arduino.h>
 
 #define right_Forward   3
@@ -16,3 +18,5 @@ public:
   void left();
   void right();
 };
+
+#endif // MOVEMENT_H

@@ -1,47 +1,41 @@
 #include "movement.h"
+#include "uasc.h"
 
 // Objects ------------------------------------------------------
 movement mov;
+uasc uasc_obj;
 
 // Global variables ---------------------------------------------
-int mode = 0;
-
+float dist = 0.0;
 void setup() {
   pinMode( right_Forward  , OUTPUT );
   pinMode( right_Backward , OUTPUT );
   pinMode( left_Forward   , OUTPUT );
   pinMode( left_Backward  , OUTPUT );
+  pinMode(trig_pin, OUTPUT);
+  pinMode(echo_pin, INPUT);
+
+  delay(2000);
+  uasc_obj.set_timer();
+  //Serial.begin(9600);
 }
 
 void loop() {
-  switch(mode){
-    case 0: 
-      mov.forward();
-      ++mode;
-      delay(1000);
-      break;
-    case 1: 
-      mov.backward();
-      ++mode;
-      delay(1000);
-      break;
-    case 2: 
-      mov.left();
-      ++mode;
-      delay(1000);    
-      break;
-    case 3: 
-      mov.right();
-      ++mode;
-      delay(1000);    
-      break;
-    case 4: 
-      mov.stopping();
-      ++mode;
-      delay(1000);
-      break;
-    default: 
-      mode = 0;
-      break;
+
+  if ( millis() - uasc_obj.get_timer() >= 100 ){
+    uasc_obj.set_timer();
+      
+    dist = uasc_obj.calculate();
+    uasc_obj.params_to_zero();
   }
+  else {
+    uasc_obj.measure();
+  }
+  if(dist > 5.0){
+    mov.forward();
+  }
+  else{
+    mov.stopping();
+  }
+  //Serial.println(dist);
 }
